@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Coming Soon</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+        
+        /* Intro Animation */
+        .intro-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+        
+        .skip-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .skip-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-animation {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .logo-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: white;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            width: 0;
+            background-color: var(--primary);
+            animation: loading 3s ease forwards;
+        }
+        
+        .loading-text {
+            color: white;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Dashboard Preview */
+        .dashboard-preview {
+            max-width: 1000px;
+            width: 100%;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .preview-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .preview-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .preview-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .preview-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .preview-sidebar {
+            width: 220px;
+            background-color: #f8fafc;
+            position: absolute;
+            top: 70px;
+            bottom: 0;
+            left: 0;
+            padding: 1.5rem 1rem;
+            border-right: 1px solid #e2e8f0;
+        }
+        
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        
+        .sidebar-item.active {
+            background-color: #ede9fe;
+            color: var(--primary);
+            opacity: 1;
+        }
+        
+        .sidebar-icon {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .preview-content {
+            min-height: 500px;
+            margin-left: 220px;
+            padding: 1.5rem;
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .preview-card {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .preview-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        .preview-chart {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            height: 200px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .preview-chart::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        .preview-list {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            height: 150px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .preview-list::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Coming Soon Message */
+        .coming-soon {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .coming-soon h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .coming-soon p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .launch-info {
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: rgba(79, 70, 229, 0.1);
+            border-radius: 8px;
+            display: block;
+            max-width: 500px;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .notify-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .notify-button:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+        
+        .back-button {
+            background-color: white;
+            color: var(--dark);
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background-color: #f8fafc;
+            transform: translateY(-2px);
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes loading {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+        
+        @keyframes shimmer {
+            100% {
+                left: 100%;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .preview-sidebar {
+                display: none;
+            }
+            
+            .preview-content {
+                margin-left: 0;
+            }
+            
+            .preview-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro Animation -->
+    <div class="intro-animation" id="introAnimation">
+        <button class="skip-button" id="skipButton">Skip Animation</button>
+        <div class="logo-animation">
+            <div class="circle"></div>
+            <div class="logo-icon">📊</div>
+        </div>
+        <h2 style="color: white; margin-bottom: 10px;">Personal Dashboard</h2>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <div class="loading-text">Loading preview...</div>
+    </div>
+
+    <!-- Dashboard Preview -->
+    <div class="dashboard-preview">
+        <div class="preview-header">
+            <div class="preview-title">Personal Dashboard</div>
+            <div class="preview-actions">
+                <div class="preview-dot"></div>
+                <div class="preview-dot"></div>
+                <div class="preview-dot"></div>
+            </div>
+        </div>
+        
+        <div class="preview-sidebar">
+            <div class="sidebar-item active">
+                <span class="sidebar-icon">📊</span>
+                Dashboard
+            </div>
+            <div class="sidebar-item">
+                <span class="sidebar-icon">📝</span>
+                Tasks
+            </div>
+            <div class="sidebar-item">
+                <span class="sidebar-icon">📅</span>
+                Calendar
+            </div>
+            <div class="sidebar-item">
+                <span class="sidebar-icon">📈</span>
+                Analytics
+            </div>
+            <div class="sidebar-item">
+                <span class="sidebar-icon">⚙️</span>
+                Settings
+            </div>
+        </div>
+        
+        <div class="preview-content">
+            <div class="preview-grid">
+                <div class="preview-card"></div>
+                <div class="preview-card"></div>
+                <div class="preview-card"></div>
+            </div>
+            
+            <div class="preview-chart"></div>
+            
+            <div class="preview-grid">
+                <div class="preview-list"></div>
+                <div class="preview-list"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Coming Soon Message -->
+    <div class="coming-soon">
+        <h1>Coming Soon</h1>
+        <p>We're working hard to finish the development of this dashboard. Stay tuned for the launch!</p>
+        
+        <div class="launch-info">
+            <strong>This project is in active development</strong><br>
+            Launching soon with all features
+            
+            <div class="button-container">
+                 <button class="back-button" id="backButton">Back</button>
+                <button class="notify-button" id="notifyButton"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const introAnimation = document.getElementById('introAnimation');
+            const skipButton = document.getElementById('skipButton');
+            
+            // Auto-hide animation after it completes
+            setTimeout(function() {
+                introAnimation.style.opacity = '0';
+                setTimeout(function() {
+                    introAnimation.style.display = 'none';
+                }, 500);
+            }, 4000); // Match this with the loading animation duration
+            
+            // Skip button functionality
+            skipButton.addEventListener('click', function() {
+                introAnimation.style.opacity = '0';
+                setTimeout(function() {
+                    introAnimation.style.display = 'none';
+                }, 500);
+            });
+            
+            // Notify button
+            const notifyButton = document.getElementById('notifyButton');
+            notifyButton.addEventListener('click', function() {
+                alert('Thank you! We will notify you when the dashboard launches.');
+            });
+            
+            // Back button
+            backButton.addEventListener('click', function () {
+                location.href = 'Website.html'; // go directly to home
+            });
+        });
+    </script>
+</body>
+</html>
