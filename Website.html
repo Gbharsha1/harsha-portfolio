@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhavani Harsha Vardhan Gowrisetti - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .section {
+            min-height: 100vh;
+            padding: 80px 0;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background-color: #3b82f6;
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .happy-symbol {
+            font-size: 1.5rem;
+            color: #FFD700;
+            margin-right: 0.5rem;
+        }
+        
+        /* Enhanced Skill Badge Styles */
+        .skill-badge {
+            transition: all 0.3s ease;
+            transform-origin: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .skill-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .skill-badge:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-badge:hover::before {
+            width: 100%;
+        }
+        
+        /* Skill colors */
+        .skill-html {
+            background-color: #E44D26;
+            color: white;
+        }
+        
+        .skill-java {
+            background-color: #5382A1;
+            color: white;
+        }
+        
+        .skill-c {
+            background-color: #659AD2;
+            color: white;
+        }
+        
+        .skill-cyber {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        /* Additional skills with colors */
+        .skill-python {
+            background-color: #306998;
+            color: white;
+        }
+        
+        .skill-js {
+            background-color: #F7DF1E;
+            color: #333;
+        }
+        
+        .skill-react {
+            background-color: #61DAFB;
+            color: #333;
+        }
+        
+        .skill-db {
+            background-color: #F29111;
+            color: white;
+        }
+        
+        /* View Details Button */
+        .view-details-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .view-details-btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Resume Download Button */
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            background-color: #4f46e5;
+            color: white;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .resume-btn:hover {
+            background-color: #4338ca;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px rgba(79, 70, 229, 0.2);
+        }
+        
+        .resume-btn i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Form input error styles */
+        .input-error {
+            border-color: #ef4444 !important;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        /* Certification Grid Layout */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            transition: all 0.5s ease;
+        }
+        
+        .cert-item {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            position: relative;
+            height: 150px;
+        }
+        
+        .cert-item-header {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            transition: all 0.5s ease;
+        }
+        
+        .cert-item-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            overflow-y: auto;
+        }
+        
+        .cert-item.active {
+            grid-column: span 2;
+            grid-row: span 2;
+            height: auto;
+            min-height: 400px;
+        }
+        
+        .cert-item.active .cert-item-header {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .cert-item.active .cert-item-content {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .cert-item.minimized {
+            transform: scale(0.9);
+            opacity: 0.7;
+        }
+        
+        .cert-item:not(.active):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cert-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cert-back-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #f3f4f6;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cert-back-btn:hover {
+            background-color: #e5e7eb;
+        }
+        
+        .cert-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .cert-list-item {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            pointer-events: auto;
+            touch-action: manipulation;
+        }
+        
+        .cert-list-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Pastel colors for certification categories */
+        .cert-college {
+            background-color: #FFECB3; /* Pastel yellow */
+        }
+        
+        .cert-google {
+            background-color: #FFCDD2; /* Pastel red */
+        }
+        
+        .cert-cisco {
+            background-color: #C8E6C9; /* Pastel green */
+        }
+        
+        .cert-aicte {
+            background-color: #BBDEFB; /* Pastel blue */
+        }
+        
+        .cert-microsoft {
+            background-color: #D1C4E9; /* Pastel purple */
+        }
+        
+        .cert-edureka {
+            background-color: #F8BBD0; /* Pastel pink */
+        }
+        
+        .cert-internships {
+            background-color: #B2DFDB; /* Pastel teal */
+        }
+        
+        .cert-count {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Loading Animation Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #6366f1, #3b82f6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+
+        .emoji-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+        }
+
+        .emoji {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            top: -70px;
+            right: -50px;
+            background-color: white;
+            border-radius: 20px;
+            padding: 15px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: scale(0);
+            transform-origin: bottom left;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: white transparent transparent;
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 0.5s;
+        }
+
+        .progress-bar {
+            width: 250px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            margin-top: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background-color: white;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                transform: translateY(-20px) scale(1.1);
+            }
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(20deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-20deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .waving-hand {
+            display: inline-block;
+            animation: wave 1.5s infinite;
+            transform-origin: 70% 70%;
+        }
+
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            animation: typing 1s steps(10, end) forwards;
+            animation-delay: 1s;
+        }
+
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+
+        /* Profile Photo Styles */
+        .profile-photo-container {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            margin: 0 auto;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .profile-photo-bg {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #6366f1, #8b5cf6);
+            z-index: 0;
+            animation: rotate 8s linear infinite;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Photo placeholder text */
+        .photo-placeholder-text {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+            z-index: 2;
+        }
+        
+        /* Photo upload instructions */
+        .photo-instructions {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            z-index: 3;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .profile-photo:hover .photo-instructions {
+            opacity: 1;
+        }
+        /* Dark Mode Styles */
+        .theme-toggle {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            }
+        html.light .dark-icon {
+            display: block;
+            }
+        html.light .light-icon {
+            display: none;
+            }
+        html.dark .dark-icon {
+            display: none;
+            }
+        html.dark .light-icon {
+            display: block;
+            }
+
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="emoji-container">
+            <div class="emoji">
+                <svg width="150" height="150" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Face -->
+                    <circle cx="64" cy="64" r="60" fill="#FFDD67"/>
+                    <!-- Eyes -->
+                    <circle cx="44" cy="50" r="7" fill="#664E27"/>
+                    <circle cx="84" cy="50" r="7" fill="#664E27"/>
+                    <!-- Blush -->
+                    <circle cx="30" cy="68" r="10" fill="#FF9D70" opacity="0.6"/>
+                    <circle cx="98" cy="68" r="10" fill="#FF9D70" opacity="0.6"/>
+                    <!-- Smile -->
+                    <path d="M64,90 C78,90 88,82 92,74" stroke="#664E27" stroke-width="4" stroke-linecap="round" fill="none"/>
+                    <!-- Waving hand -->
+                    <g class="waving-hand" transform="translate(100, 85) rotate(10)">
+                        <circle cx="0" cy="0" r="12" fill="#FFDD67"/>
+                        <path d="M0,-12 C-5,-12 -9,-8 -9,-3 C-9,2 -5,6 0,6 C5,6 9,2 9,-3 C9,-8 5,-12 0,-12" fill="#FFDD67" stroke="#664E27" stroke-width="1"/>
+                        <path d="M-5,-3 L5,-3" stroke="#664E27" stroke-width="1.5" stroke-linecap="round"/>
+                    </g>
+                </svg>
+            </div>
+            
+       
+            <div class="speech-bubble">
+                <span class="typing-text">Hello! Buddy 👋</span>
+            </div>
+        </div>
+        <div class="loading-text">Nothing is impossible..</div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <button id="skip-button" style="
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 16px;
+    background-color: #ffffff;
+    color: #3b82f6;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    z-index: 10000;
+">
+    Skip
+</button>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <!-- Header -->
+         
+        <header class="fixed w-full bg-white dark:bg-gray-900 shadow-md z-50">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <span class="text-2xl mr-2">⭐</span>
+                        <div class="text-sm font-medium text-gray-800 dark:text-white">Bhavani Harsha Vardhan Gowrisetti</div>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 dark:text-white hover:text-blue-500  transition-colors">Home</a>
+                    <a href="#about" class="nav-link text-gray-700 dark:text-white hover:text-blue-500 transition-colors">About</a>
+                    <a href="#projects" class="nav-link text-gray-700 dark:text-white hover:text-blue-500 transition-colors">Projects</a>
+                    <a href="#experience" class="nav-link text-gray-700 dark:text-white hover:text-blue-500 transition-colors">Experience</a>
+                    <a href="#certifications" class="nav-link text-gray-700 dark:text-white hover:text-blue-500 transition-colors">Certifications</a>
+                    <a href="#contact" class="nav-link text-gray-700 dark:text-white hover:text-blue-500 transition-colors">Contact</a>
+                    
+                    <!-- Toggle Button -->
+                    <button id="theme-toggle" class="theme-toggle text-gray-700 hover:text-blue-500 transition-colors">
+                        <i class="fas fa-moon dark-icon"></i>
+                        <i class="fas fa-sun light-icon hidden"></i>
+                    </button>
+                </nav>
+                <button class="md:hidden text-gray-700 focus:outline-none" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile menu -->
+            <div class="md:hidden hidden bg-white w-full" id="mobile-menu">
+                <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                    <a href="#home" class="text-gray-700 hover:text-blue-500 transition-colors">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-500 transition-colors">About</a>
+                    <a href="#projects" class="text-gray-700 hover:text-blue-500 transition-colors">Projects</a>
+                    <a href="#certifications" class="text-gray-700 hover:text-blue-500 transition-colors">Certifications</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-500 transition-colors">Contact</a>
+                    <!-- Toggle Button -->
+                    <button id="mobile-theme-toggle" class="theme-toggle text-gray-700 hover:text-blue-500 transition-colors">
+                        <i class="fas fa-moon dark-icon"></i>
+                        <i class="fas fa-sun light-icon hidden"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+<!-- Home Section -->
+<section id="home" class="section bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-black text-gray-800 dark:text-white flex items-center">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center">
+      
+      <!-- Centered Text Block -->
+      <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeIn text-center md:text-left">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-blue-800">
+          Hello, I'm <span class="text-blue-600 dark:text-red-800">Bhavani Harsha</span>
+        </h1>
+        <p class="text-xl text-gray-600 mb-8">Information Technology Student & Cyber Security Enthusiast</p>
+        <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4">
+          <a href="#about" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
+            About Me
+          </a>
+          <a href="#projects" class="px-6 py-3 bg-white text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
+            View Projects
+          </a>
+        </div>
+        <a href="Harsha_resume.pdf" download class="resume-btn mt-8 inline-flex items-center justify-center">
+            <i class="fas fa-download mr-2"></i> Download Resume
+        </a>
+      </div>
+
+      <!-- Profile Photo Container -->
+      <div class="md:w-1/2 flex justify-center">
+        <div class="profile-photo-container">
+          <!-- Animated Background -->
+          <div class="profile-photo-bg"></div>
+
+          <!-- Actual Profile Photo -->
+          <div class="profile-photo">
+            <img src="h4.jpg" alt="Profile Photo" class="w-full h-full rounded-full object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+        <!-- About Section -->
+<section id="about" class="section bg-white dark:bg-gray-900 text-gray-800 dark:text-white min-h-screen flex items-center justify-center">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-12 text-center">About Me</h2>
+    <div class="flex flex-col md:flex-row items-center">
+      <!-- Left Column -->
+      <div class="md:w-1/2 mb-8 md:mb-0 pr-0 md:pr-8 flex flex-col justify-center items-center text-center md:items-start md:text-left">
+        <h3 class="text-2xl font-semibold mb-4 text-blue-600">Who I Am</h3>
+        <p class="text-gray-700 dark:text-white mb-6 leading-relaxed">
+          I am a final-year Information Technology student at R.V.R & J.C College of Engineering, Guntur, currently holding a GPA of 7.8. My passion for understanding complex systems and solving real-world challenges has guided me toward the field of cybersecurity. I am deeply committed to continuous learning and thrive in environments that encourage innovation and growth. With a strong technical foundation, problem-solving mindset, and enthusiasm for emerging technologies, I am eager to contribute to forward-thinking projects and excel in a dynamic multinational company setting.
+        </p>
+        <h3 class="text-2xl font-semibold mb-4 text-blue-600">Skills</h3>
+        <div class="flex flex-wrap gap-3 mb-6 justify-center md:justify-start">
+          <span class="skill-badge skill-html px-4 py-2 rounded-full font-medium flex items-center">
+            <i class="fab fa-html5 mr-2"></i>HTML
+          </span>
+          <span class="skill-badge skill-java px-4 py-2 rounded-full font-medium flex items-center">
+            <i class="fab fa-java mr-2"></i>Java
+          </span>
+          <span class="skill-badge skill-c px-4 py-2 rounded-full font-medium flex items-center">
+            <i class="fas fa-code mr-2"></i>C Programming
+          </span>
+          <span class="skill-badge skill-cyber px-4 py-2 rounded-full font-medium flex items-center">
+            <i class="fas fa-shield-alt mr-2"></i>Cyber Security
+          </span>
+          <span class="skill-badge skill-python px-4 py-2 rounded-full font-medium flex items-center">
+            <i class="fab fa-python mr-2"></i>Python
+          </span>
+          <span class="skill-badge skill-js px-4 py-2 rounded-full font-medium flex items-center">
+            <i class="fab fa-js mr-2"></i>JavaScript
+          </span>
+          <span class="skill-badge skill-css px-4 py-2 rounded-full font-medium flex items-center bg-blue-500 text-white">
+  <i class="fab fa-css3-alt mr-2"></i>CSS
+</span>
+          <span class="skill-badge skill-db px-4 py-2 rounded-full font-medium flex items-center">
+            <i class="fas fa-database mr-2"></i>SQL
+          </span>
+        </div>
+      </div>
+      <!-- Right Column -->
+      <div class="md:w-1/2">
+        <h3 class="text-2xl font-semibold mb-4 text-blue-600">Education</h3>
+        <div class="timeline space-y-6">
+          <div class="timeline-item">
+            <h4 class="text-xl font-medium">R.V.R & J.C College of Engineering</h4>
+            <p class="text-gray-600">2021–Present</p>
+            <p class="text-gray-700">Bachelor's in Information Technology</p>
+          </div>
+          <div class="timeline-item">
+            <h4 class="text-xl font-medium">Sri Chaitanya Junior College</h4>
+            <p class="text-gray-600">2019–2021</p>
+            <p class="text-gray-700">Higher Secondary Education</p>
+          </div>
+          <div class="timeline-item">
+            <h4 class="text-xl font-medium">Sir C.R Reddy Public School</h4>
+            <p class="text-gray-600">2018–2019</p>
+            <p class="text-gray-700">Secondary Education</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+        <!-- Projects Section -->
+        <section id="projects" class="section bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-center">My Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden shadow-md">
+                        <div class="h-48 bg-blue-100 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl dark:text-blue-700 font-semibold mb-2">Personal Voice Assistant</h3>
+                            <p class="text-gray-600 mb-4">A voice-controlled assistant that can perform various tasks through voice commands.</p>
+                            <a href="PVA.html" class="view-details-btn w-full">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden shadow-md">
+                        <div class="h-48 bg-yellow-100 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl dark:text-yellow-600 font-semibold mb-2">Password Strength Checker</h3>
+                            <p class="text-gray-600 mb-4">A tool that evaluates password security and provides improvement suggestions.</p>
+                            <a href="Passwordchecker.html" class="view-details-btn w-full">View Details</a>
+                        </div>
+                    </div>
+                    <!-- Project 3 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden shadow-md">
+                        <div class="h-48 bg-green-100 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl dark:text-green-800 font-semibold mb-2">Loan Prediction System</h3>
+                            <p class="text-gray-600 mb-4">A system that predicts loan approval probability based on applicant data.</p>
+                            <a href="loan.html" class="view-details-btn w-full">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden shadow-md">
+                        <div class="h-48 bg-purple-100 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl dark:text-purple-800 font-semibold mb-2">Personal Dashboard</h3>
+                            <p class="text-gray-600 mb-4">A customizable dashboard to track personal metrics and productivity.</p>
+                            <a href="personaldashboard.html" class="view-details-btn w-full">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 5 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden shadow-md">
+                        <div class="h-48 bg-red-100 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl dark:text-red-800 font-semibold mb-2">Fraud Detection using Machine Learning</h3>
+                            <p class="text-gray-600 mb-4">An ML model that identifies potentially fraudulent transactions with high accuracy.</p>
+                            <a href="FDML.html" class="view-details-btn w-full">View Details</a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <!-- Experience Section -->
+        <section id="experience" class="section bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">My Experience</h2>
+            <div class="timeline space-y-6">
+                <div class="timeline-item">
+                <h4 class="text-xl font-semibold">Intern – CoDetech Solution</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-300">Feb 2025 – Present</p>
+                <p class="text-gray-700 dark:text-gray-200">Working as Cyber Security & Ethical Hacking intern</p>
+            </div>
+            <div class="timeline-item">
+                <h4 class="text-xl font-semibold">Intern – Next24Tech</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-300">June – July 2024</p>
+                <p class="text-gray-700 dark:text-gray-200">Worked on web & app penetration testing and reporting vulnerabilities.</p>
+            </div>
+            <div class="timeline-item">
+                <h4 class="text-xl font-semibold">ML Internship – Internshala</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-300">March – April 2024</p>
+                <p class="text-gray-700 dark:text-gray-200">Completed a machine learning project using Python and Pandas.</p>
+            </div>
+            <!-- Add more experiences as needed -->
+            </div>
+        </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="section bg-white dark:bg-gray-900 text-gray-800 dark:text-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-center">My Certifications</h2>
+                <p class="text-center text-gray-600 dark:text-red-800 mb-8">I've completed 24+ certifications across various domains</p>
+                
+                <div class="cert-grid">
+                    <!-- College Events -->
+                    <div class="cert-item cert-college" data-category="college">
+                        <div class="cert-count dark:text-black">8</div>
+                        <div class="cert-item-header">
+                            <i class="fas fa-graduation-cap cert-icon text-yellow-700"></i>
+                            <h3 class="text-xl font-semibold text-yellow-800">College Events</h3>
+                        </div>
+                        <div class="cert-item-content cert-college">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-semibold text-yellow-800 dark:text-black">College Events</h3>
+                                <div class="cert-back-btn">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="cert-list">
+                                <a href="Matholy.jpg" target="_blank" class="cert-list-item bg-yellow-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Maths Olympiad</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Kshitij IIT KGP</p>
+                                    <img src="Matholy.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10" />
+                                </a>
+                                <a href="sorcecode.jpg" target="_blank" class="cert-list-item bg-yellow-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Source Code</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Kshitij IIT KGP</p>
+                                    <img src="sorcecode.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                <a href="Certifcate (codathon).jpg" target="_blank" class="cert-list-item bg-yellow-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Codathon</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">R.V.R. & J.C.</p>
+                                    <img src="Certifcate (codathon).jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                <a href="webtrivia.jpg" target="_blank" class="cert-list-item bg-yellow-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Web Trivia</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Web Development</p>
+                                    <img src="webtrivia.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10" />
+                                </a>
+                                <a href="InformaTrix.jpeg" target="_blank" class="cert-list-item bg-yellow-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">InformaTrix</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Web Development</p>
+                                    <img src="InformaTrix.jpeg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                <a href="Video Editor.jpeg" target="_blank" class="cert-list-item bg-yellow-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Lead Designer</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">(Banner,Photo editor)</p>
+                                    <img src="Video Editor.jpeg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                 <a href="Team Leader and incharge.jpeg" target="_blank" class="cert-list-item bg-yellow-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Team Leader & Incharge</h4
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Deals with Guest Banner's & New Sico Logo Designer</p>
+                                    <img src="Team Leader and incharge.jpeg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                 <a href="STA.jpeg" target="_blank" class="cert-list-item bg-yellow-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Student Technical Advisor</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4"></p>
+                                    <img src="STA.jpeg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Google Certifications -->
+                    <div class="cert-item cert-google" data-category="google">
+                        <div class="cert-count dark:text-gray-600">8</div>
+                        <div class="cert-item-header">
+                            <i class="fab fa-google cert-icon text-red-700"></i>
+                            <h3 class="text-xl font-semibold text-red-800">Google</h3>
+                        </div>
+                        <div class="cert-item-content cert-google">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-semibold text-red-800">Google Certifications</h3>
+                                <div class="cert-back-btn">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="cert-list">
+                                <a href="Coursera cs-1.jpg" target="_blank" class="cert-list-item bg-red-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Introduction</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Teach Basics</p>
+                                    <img src="Coursera cs-1.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                <a href="Coursera cs-2.jpg" target="_blank" class="cert-list-item bg-red-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Play It Safe</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Manage Security Risks</p>
+                                    <img src="Coursera cs-2.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                 <a href="Coursera cs-3.jpg" target="_blank" class="cert-list-item bg-red-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Connect and Protect</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">About Networks and Network Security</p>
+                                    <img src="Coursera cs-3.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                 <a href="Coursera cp-4.jpg" target="_blank" class="cert-list-item bg-red-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Tools of the Trade</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Linux and SQL</p>
+                                    <img src="Coursera cp-4.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                 <a href="Coursera cp-5.jpg" target="_blank" class="cert-list-item bg-red-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Assets & Threats</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">About Vulnerabilities</p>
+                                    <img src="Coursera cp-5.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                 <a href="Coursera cp-7.jpg" target="_blank" class="cert-list-item bg-red-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Automate Cybersecurity Tasks</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">With help of Python</p>
+                                    <img src="Coursera cp-7.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                 <a href="Coursera cp-8.jpg" target="_blank" class="cert-list-item bg-red-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Put It to Work</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Prepare for Cybersecurity Jobs</p>
+                                    <img src="Coursera cp-8.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                 <a href="Coursera CS FINAL.jpg" target="_blank" class="cert-list-item bg-red-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Completion Certificate</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Cybersecurity</p>
+                                    <img src="Coursera CS FINAL.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cisco Certifications -->
+                    <div class="cert-item cert-cisco" data-category="cisco">
+                        <div class="cert-count dark:text-gray-600">1</div>
+                        <div class="cert-item-header">
+                            <i class="fas fa-network-wired cert-icon text-green-700"></i>
+                            <h3 class="text-xl font-semibold text-green-800">Cisco</h3>
+                        </div>
+                        <div class="cert-item-content cert-cisco">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-semibold text-green-800">Cisco Certifications</h3>
+                                <div class="cert-back-btn">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="cert-list">
+                                <a href="cisco.jpg" target="_blank" class="cert-list-item bg-green-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Introduction to Cybersecurity</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Basics</p>
+                                    <img src="cisco.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AICTE -->
+                    <div class="cert-item cert-aicte" data-category="aicte">
+                        <div class="cert-count dark:text-gray-600">3</div>
+                        <div class="cert-item-header">
+                            <i class="fas fa-university cert-icon text-blue-700"></i>
+                            <h3 class="text-xl font-semibold text-blue-800">AICTE</h3>
+                        </div>
+                        <div class="cert-item-content cert-aicte">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-semibold text-blue-800">AICTE Certifications</h3>
+                                <div class="cert-back-btn">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="cert-list">
+                                <a href="aicte cloud.jpg" target="_blank" class="cert-list-item bg-green-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Cloud Computing</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4"></p>
+                                    <img src="aicte cloud.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                <a href="aicte cohart-6.jpg" target="_blank" class="cert-list-item bg-green-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Andriod Developer</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Virtual Internship</p>
+                                    <img src="aicte cohart-6.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                                <a href="coh-8.jpg" target="_blank" class="cert-list-item bg-green-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Data Engineering</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Intermediate level</p>
+                                    <img src="coh-8.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Microsoft -->
+                    <div class="cert-item cert-microsoft" data-category="microsoft">
+                        <div class="cert-count dark:text-gray-600">1</div>
+                        <div class="cert-item-header">
+                            <i class="fab fa-microsoft cert-icon text-purple-700"></i>
+                            <h3 class="text-xl font-semibold text-purple-800">Microsoft</h3>
+                        </div>
+                        <div class="cert-item-content cert-microsoft">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-semibold text-purple-800">Microsoft Certifications</h3>
+                                <div class="cert-back-btn">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="cert-list">
+                                <a href="tcs.jpg" target="_blank" class="cert-list-item bg-purple-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">CyberSuraksha</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4"></p>
+                                    <img src="tcs.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a>                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Edureka -->
+                    <div class="cert-item cert-edureka" data-category="edureka">
+                        <div class="cert-count dark:text-gray-600">1</div>
+                        <div class="cert-item-header">
+                            <i class="fas fa-laptop-code cert-icon text-pink-700"></i>
+                            <h3 class="text-xl font-semibold text-pink-800">Edureka</h3>
+                        </div>
+                        <div class="cert-item-content cert-edureka">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl  dark:text-gray-600 font-semibold text-pink-800">Edureka Certifications</h3>
+                                <div class="cert-back-btn">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="cert-list">
+                                <a href="edureka - internship certificate.jpg" target="_blank" class="cert-list-item bg-pink-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Certificate of attandance</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">Demo session for Cyber security</p>
+                                    <img src="edureka - internship certificate.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a> 
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Internships -->
+                    <div class="cert-item cert-internships" data-category="internships">
+                        <div class="cert-count dark:text-gray-600 ">2</div>
+                        <div class="cert-item-header">
+                            <i class="fas fa-briefcase cert-icon text-teal-700"></i>
+                            <h3 class="text-xl font-semibold text-teal-800">Internships</h3>
+                        </div>
+                        <div class="cert-item-content cert-internships">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-semibold text-teal-800">Internships</h3>
+                                <div class="cert-back-btn">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="cert-list">
+                                <a href="Internship.jpg" target="_blank" class="cert-list-item bg-pink-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600 px-4 pt-4">Next24tech Technology & Services LLP</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">2 Months Internship</p>
+                                    <img src="Internship.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10" />
+                                </a> 
+                                <a href="ml.jpg" target="_blank" class="cert-list-item bg-pink-50 relative group overflow-hidden block rounded-lg">
+                                    <h4 class="font-medium dark:text-gray-600  px-4 pt-4">Machine Learning</h4>
+                                    <p class="text-sm text-gray-600 px-4 pb-4">6 Weeks Internship</p>
+                                    <img src="ml.jpg" alt="Maths Olympiad" class="absolute top-0 left-0 w-full h-full object-contain bg-white rounded-lg p-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 z-10 " />
+                                </a> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section bg-blue-50 dark:bg-gray-900 text-gray-800 dark:text-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-center">Get In Touch</h2>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2">
+                        <form action="https://formsubmit.co/gbharshawrk39@gmail.com" method="POST" class="bg-white p-6 rounded-lg shadow-md" onsubmit="handleSuccessMessage(event)">
+                            
+                            <input type="hidden" name="_captcha" value="false">
+
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Name">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Email">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Message"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">Send Message</button>
+                            <p id="success-message" class="text-green-600 text-black hidden transition-opacity duration-500">✅ Your message has been sent successfully!</p>
+                        </form>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                            <h3 class="text-xl font-semibold mb-4">Connect With Me</h3>
+                            <p class="text-gray-600 mb-6">Feel free to reach out to me through any of these platforms. I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+                            <div class="flex space-x-4 mb-6">
+                                <a href="https://www.linkedin.com/in/gbharsha" target="_blank" class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="mailto:gbharshavardhan18@gmail.com" class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-colors">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
+                            <div class="border-t border-gray-200 pt-6">
+                                <p class="text-gray-600 mb-2"><i class="fas fa-envelope text-blue-500 mr-2"></i> gbharshavardhan18@gmail.com</p>
+                                <p class="text-gray-600"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> Guntur, Andhra Pradesh, India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="	bg-white text-gray-800 dark:bg-gray-900 dark:text-white py-8">
+            <div class="container mx-auto px-4 text-center">
+                <p>&copy; 2021 Bhavani Harsha Vardhan Gowrisetti</p>
+                <p>All rights reserved</p>
+                <p class="mt-2 text-gray-400">Information Technology Student & Cyber Security Enthusiast</p>
+            </div>
+        </footer>
+    </div>
+
+    <div id="cert-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+  <div class="bg-white p-4 rounded-lg max-w-2xl w-full relative">
+    <button onclick="closeCertificate()" class="absolute top-2 right-2 text-gray-600 hover:text-black text-xl font-bold">&times;</button>
+    <img id="cert-image" src="" alt="Certificate" class="w-full rounded-lg" />
+  </div>
+</div>
+
+ <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    const progressFill = document.getElementById('progress-fill');
+    const speechBubble = document.querySelector('.speech-bubble');
+    const skipButton = document.getElementById('skip-button');
+
+    // Show speech bubble
+    setTimeout(() => {
+        speechBubble.style.opacity = '1';
+        speechBubble.style.transform = 'scale(1)';
+        speechBubble.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    }, 500);
+
+    // Simulate loading progress
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += Math.random() * 10;
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+            setTimeout(() => {
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    mainContent.classList.add('visible');
+                }, 500);
+            }, 1000);
+        }
+        progressFill.style.width = `${progress}%`;
+    }, 200);
+
+    // Skip button logic
+    skipButton.addEventListener('click', function () {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            mainContent.classList.add('visible');
+        }, 500);
+    });
+
+    // Fallback auto-hide in case loading hangs
+    setTimeout(() => {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            mainContent.classList.add('visible');
+        }, 500);
+    }, 3500);
+});
+
+// Mobile menu toggle
+document.getElementById('menu-toggle').addEventListener('click', function () {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+});
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            document.getElementById('mobile-menu').classList.add('hidden');
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+    });
+});
+
+// Certification card expansion
+document.querySelectorAll('.cert-item').forEach(item => {
+    item.addEventListener('click', function () {
+        if (this.classList.contains('active')) return;
+        document.querySelectorAll('.cert-item.active').forEach(active => active.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('.cert-item:not(.active)').forEach(other => other.classList.add('minimized'));
+    });
+});
+
+document.querySelectorAll('.cert-back-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const certItem = this.closest('.cert-item');
+        certItem.classList.remove('active');
+        document.querySelectorAll('.cert-item').forEach(item => item.classList.remove('minimized'));
+    });
+});
+
+// Success message handler for contact form
+function handleSuccessMessage(event) {
+    event.preventDefault();
+    const form = event.target;
+    fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+    }).then(response => {
+        if (response.ok) {
+            form.reset();
+            document.getElementById('success-message').classList.remove('hidden');
+        } else {
+            alert("Something went wrong. Please try again.");
+        }
+    });
+}
+document.getElementById('success-message').style.opacity = '1';
+
+// Resume button dummy
+const resumeBtn = document.getElementById('resume-download');
+if (resumeBtn) {
+    resumeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        alert('Resume download functionality would be implemented here.');
+    });
+}
+
+// Animations on scroll
+const observerOptions = { threshold: 0.1 };
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fadeIn');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('section > div > h2, .project-card, .timeline-item, .cert-item').forEach(el => {
+    el.classList.add('opacity-0');
+    observer.observe(el);
+});
+
+// Inject fadeIn CSS
+document.head.insertAdjacentHTML('beforeend', `
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        .opacity-0 {
+            opacity: 0;
+        }
+    </style>
+`);
+
+// Skill badge hover effects
+document.querySelectorAll('.skill-badge').forEach(badge => {
+    badge.addEventListener('mouseover', () => {
+        badge.style.transform = 'translateY(-3px) scale(1.05)';
+    });
+    badge.addEventListener('mouseout', () => {
+        badge.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+// Project alert
+
+
+// Certificate modal
+function showCertificate(imageName) {
+    document.getElementById('cert-image').src = 'certificates/' + imageName;
+    document.getElementById('cert-modal').classList.remove('hidden');
+}
+function closeCertificate() {
+    document.getElementById('cert-modal').classList.add('hidden');
+}
+
+// Theme toggle
+const htmlElement = document.documentElement;
+const themeToggle = document.getElementById('theme-toggle');
+const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    htmlElement.classList.add(savedTheme);
+} else {
+    htmlElement.classList.add('light');
+}
+
+function toggleTheme() {
+    if (htmlElement.classList.contains('dark')) {
+        htmlElement.classList.remove('dark');
+        htmlElement.classList.add('light');
+        localStorage.setItem('theme', 'light');
+    } else {
+        htmlElement.classList.remove('light');
+        htmlElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+themeToggle.addEventListener('click', toggleTheme);
+mobileThemeToggle.addEventListener('click', toggleTheme);
+</script>
+
+</body>
+</html>
